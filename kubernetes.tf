@@ -1,8 +1,4 @@
 locals = {
-  bastion_autoscaling_group_ids     = ["${aws_autoscaling_group.bastions-kuberneteskhuslen-com.id}"]
-  bastion_security_group_ids        = ["${aws_security_group.bastion-kuberneteskhuslen-com.id}"]
-  bastions_role_arn                 = "${aws_iam_role.bastions-kuberneteskhuslen-com.arn}"
-  bastions_role_name                = "${aws_iam_role.bastions-kuberneteskhuslen-com.name}"
   cluster_name                      = "kuberneteskhuslen.com"
   master_autoscaling_group_ids      = ["${aws_autoscaling_group.master-us-west-2a-masters-kuberneteskhuslen-com.id}", "${aws_autoscaling_group.master-us-west-2b-masters-kuberneteskhuslen-com.id}", "${aws_autoscaling_group.master-us-west-2c-masters-kuberneteskhuslen-com.id}"]
   master_security_group_ids         = ["${aws_security_group.masters-kuberneteskhuslen-com.id}"]
@@ -26,22 +22,6 @@ locals = {
   subnet_utility-us-west-2c_id      = "${aws_subnet.utility-us-west-2c-kuberneteskhuslen-com.id}"
   vpc_cidr_block                    = "${aws_vpc.kuberneteskhuslen-com.cidr_block}"
   vpc_id                            = "${aws_vpc.kuberneteskhuslen-com.id}"
-}
-
-output "bastion_autoscaling_group_ids" {
-  value = ["${aws_autoscaling_group.bastions-kuberneteskhuslen-com.id}"]
-}
-
-output "bastion_security_group_ids" {
-  value = ["${aws_security_group.bastion-kuberneteskhuslen-com.id}"]
-}
-
-output "bastions_role_arn" {
-  value = "${aws_iam_role.bastions-kuberneteskhuslen-com.arn}"
-}
-
-output "bastions_role_name" {
-  value = "${aws_iam_role.bastions-kuberneteskhuslen-com.name}"
 }
 
 output "cluster_name" {
@@ -140,11 +120,6 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_autoscaling_attachment" "bastions-kuberneteskhuslen-com" {
-  elb                    = "${aws_elb.bastion-kuberneteskhuslen-com.id}"
-  autoscaling_group_name = "${aws_autoscaling_group.bastions-kuberneteskhuslen-com.id}"
-}
-
 resource "aws_autoscaling_attachment" "master-us-west-2a-masters-kuberneteskhuslen-com" {
   elb                    = "${aws_elb.api-kuberneteskhuslen-com.id}"
   autoscaling_group_name = "${aws_autoscaling_group.master-us-west-2a-masters-kuberneteskhuslen-com.id}"
@@ -158,41 +133,6 @@ resource "aws_autoscaling_attachment" "master-us-west-2b-masters-kuberneteskhusl
 resource "aws_autoscaling_attachment" "master-us-west-2c-masters-kuberneteskhuslen-com" {
   elb                    = "${aws_elb.api-kuberneteskhuslen-com.id}"
   autoscaling_group_name = "${aws_autoscaling_group.master-us-west-2c-masters-kuberneteskhuslen-com.id}"
-}
-
-resource "aws_autoscaling_group" "bastions-kuberneteskhuslen-com" {
-  name                 = "bastions.kuberneteskhuslen.com"
-  launch_configuration = "${aws_launch_configuration.bastions-kuberneteskhuslen-com.id}"
-  max_size             = 1
-  min_size             = 1
-  vpc_zone_identifier  = ["${aws_subnet.utility-us-west-2a-kuberneteskhuslen-com.id}", "${aws_subnet.utility-us-west-2b-kuberneteskhuslen-com.id}", "${aws_subnet.utility-us-west-2c-kuberneteskhuslen-com.id}"]
-
-  tag = {
-    key                 = "KubernetesCluster"
-    value               = "kuberneteskhuslen.com"
-    propagate_at_launch = true
-  }
-
-  tag = {
-    key                 = "Name"
-    value               = "bastions.kuberneteskhuslen.com"
-    propagate_at_launch = true
-  }
-
-  tag = {
-    key                 = "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
-    value               = "bastions"
-    propagate_at_launch = true
-  }
-
-  tag = {
-    key                 = "k8s.io/role/bastion"
-    value               = "1"
-    propagate_at_launch = true
-  }
-
-  metrics_granularity = "1Minute"
-  enabled_metrics     = ["GroupDesiredCapacity", "GroupInServiceInstances", "GroupMaxSize", "GroupMinSize", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
 }
 
 resource "aws_autoscaling_group" "master-us-west-2a-masters-kuberneteskhuslen-com" {
@@ -485,41 +425,6 @@ resource "aws_elb" "api-kuberneteskhuslen-com" {
   }
 }
 
-resource "aws_elb" "bastion-kuberneteskhuslen-com" {
-  name = "bastion-kuberneteskhuslen-dfj5ld"
-
-  listener = {
-    instance_port     = 22
-    instance_protocol = "TCP"
-    lb_port           = 22
-    lb_protocol       = "TCP"
-  }
-
-  security_groups = ["${aws_security_group.bastion-elb-kuberneteskhuslen-com.id}"]
-  subnets         = ["${aws_subnet.utility-us-west-2a-kuberneteskhuslen-com.id}", "${aws_subnet.utility-us-west-2b-kuberneteskhuslen-com.id}", "${aws_subnet.utility-us-west-2c-kuberneteskhuslen-com.id}"]
-
-  health_check = {
-    target              = "TCP:22"
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    interval            = 10
-    timeout             = 5
-  }
-
-  idle_timeout = 300
-
-  tags = {
-    KubernetesCluster                             = "kuberneteskhuslen.com"
-    Name                                          = "bastion.kuberneteskhuslen.com"
-    "kubernetes.io/cluster/kuberneteskhuslen.com" = "owned"
-  }
-}
-
-resource "aws_iam_instance_profile" "bastions-kuberneteskhuslen-com" {
-  name = "bastions.kuberneteskhuslen.com"
-  role = "${aws_iam_role.bastions-kuberneteskhuslen-com.name}"
-}
-
 resource "aws_iam_instance_profile" "masters-kuberneteskhuslen-com" {
   name = "masters.kuberneteskhuslen.com"
   role = "${aws_iam_role.masters-kuberneteskhuslen-com.name}"
@@ -530,11 +435,6 @@ resource "aws_iam_instance_profile" "nodes-kuberneteskhuslen-com" {
   role = "${aws_iam_role.nodes-kuberneteskhuslen-com.name}"
 }
 
-resource "aws_iam_role" "bastions-kuberneteskhuslen-com" {
-  name               = "bastions.kuberneteskhuslen.com"
-  assume_role_policy = "${file("${path.module}/data/aws_iam_role_bastions.kuberneteskhuslen.com_policy")}"
-}
-
 resource "aws_iam_role" "masters-kuberneteskhuslen-com" {
   name               = "masters.kuberneteskhuslen.com"
   assume_role_policy = "${file("${path.module}/data/aws_iam_role_masters.kuberneteskhuslen.com_policy")}"
@@ -543,12 +443,6 @@ resource "aws_iam_role" "masters-kuberneteskhuslen-com" {
 resource "aws_iam_role" "nodes-kuberneteskhuslen-com" {
   name               = "nodes.kuberneteskhuslen.com"
   assume_role_policy = "${file("${path.module}/data/aws_iam_role_nodes.kuberneteskhuslen.com_policy")}"
-}
-
-resource "aws_iam_role_policy" "bastions-kuberneteskhuslen-com" {
-  name   = "bastions.kuberneteskhuslen.com"
-  role   = "${aws_iam_role.bastions-kuberneteskhuslen-com.name}"
-  policy = "${file("${path.module}/data/aws_iam_role_policy_bastions.kuberneteskhuslen.com_policy")}"
 }
 
 resource "aws_iam_role_policy" "masters-kuberneteskhuslen-com" {
@@ -576,28 +470,6 @@ resource "aws_internet_gateway" "kuberneteskhuslen-com" {
 resource "aws_key_pair" "kubernetes-kuberneteskhuslen-com-3b24d0395089b58c7e5288ff5c0318e7" {
   key_name   = "kubernetes.kuberneteskhuslen.com-3b:24:d0:39:50:89:b5:8c:7e:52:88:ff:5c:03:18:e7"
   public_key = "${file("${path.module}/data/aws_key_pair_kubernetes.kuberneteskhuslen.com-3b24d0395089b58c7e5288ff5c0318e7_public_key")}"
-}
-
-resource "aws_launch_configuration" "bastions-kuberneteskhuslen-com" {
-  name_prefix                 = "bastions.kuberneteskhuslen.com-"
-  image_id                    = "ami-0d8618ba6320df983"
-  instance_type               = "t2.micro"
-  key_name                    = "${aws_key_pair.kubernetes-kuberneteskhuslen-com-3b24d0395089b58c7e5288ff5c0318e7.id}"
-  iam_instance_profile        = "${aws_iam_instance_profile.bastions-kuberneteskhuslen-com.id}"
-  security_groups             = ["${aws_security_group.bastion-kuberneteskhuslen-com.id}"]
-  associate_public_ip_address = true
-
-  root_block_device = {
-    volume_type           = "gp2"
-    volume_size           = 32
-    delete_on_termination = true
-  }
-
-  lifecycle = {
-    create_before_destroy = true
-  }
-
-  enable_monitoring = false
 }
 
 resource "aws_launch_configuration" "master-us-west-2a-masters-kuberneteskhuslen-com" {
@@ -762,19 +634,6 @@ resource "aws_route53_record" "api-kuberneteskhuslen-com" {
   zone_id = "/hostedzone/Z25EJ74CJ61C91"
 }
 
-resource "aws_route53_record" "bastion-kuberneteskhuslen-com" {
-  name = "bastion.kuberneteskhuslen.com"
-  type = "A"
-
-  alias = {
-    name                   = "${aws_elb.bastion-kuberneteskhuslen-com.dns_name}"
-    zone_id                = "${aws_elb.bastion-kuberneteskhuslen-com.zone_id}"
-    evaluate_target_health = false
-  }
-
-  zone_id = "/hostedzone/Z25EJ74CJ61C91"
-}
-
 resource "aws_route53_zone_association" "Z25EJ74CJ61C91" {
   zone_id = "/hostedzone/Z25EJ74CJ61C91"
   vpc_id  = "${aws_vpc.kuberneteskhuslen-com.id}"
@@ -866,30 +725,6 @@ resource "aws_security_group" "api-elb-kuberneteskhuslen-com" {
   }
 }
 
-resource "aws_security_group" "bastion-elb-kuberneteskhuslen-com" {
-  name        = "bastion-elb.kuberneteskhuslen.com"
-  vpc_id      = "${aws_vpc.kuberneteskhuslen-com.id}"
-  description = "Security group for bastion ELB"
-
-  tags = {
-    KubernetesCluster                             = "kuberneteskhuslen.com"
-    Name                                          = "bastion-elb.kuberneteskhuslen.com"
-    "kubernetes.io/cluster/kuberneteskhuslen.com" = "owned"
-  }
-}
-
-resource "aws_security_group" "bastion-kuberneteskhuslen-com" {
-  name        = "bastion.kuberneteskhuslen.com"
-  vpc_id      = "${aws_vpc.kuberneteskhuslen-com.id}"
-  description = "Security group for bastion"
-
-  tags = {
-    KubernetesCluster                             = "kuberneteskhuslen.com"
-    Name                                          = "bastion.kuberneteskhuslen.com"
-    "kubernetes.io/cluster/kuberneteskhuslen.com" = "owned"
-  }
-}
-
 resource "aws_security_group" "masters-kuberneteskhuslen-com" {
   name        = "masters.kuberneteskhuslen.com"
   vpc_id      = "${aws_vpc.kuberneteskhuslen-com.id}"
@@ -948,42 +783,6 @@ resource "aws_security_group_rule" "api-elb-egress" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-}
-
-resource "aws_security_group_rule" "bastion-egress" {
-  type              = "egress"
-  security_group_id = "${aws_security_group.bastion-kuberneteskhuslen-com.id}"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-}
-
-resource "aws_security_group_rule" "bastion-elb-egress" {
-  type              = "egress"
-  security_group_id = "${aws_security_group.bastion-elb-kuberneteskhuslen-com.id}"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-}
-
-resource "aws_security_group_rule" "bastion-to-master-ssh" {
-  type                     = "ingress"
-  security_group_id        = "${aws_security_group.masters-kuberneteskhuslen-com.id}"
-  source_security_group_id = "${aws_security_group.bastion-kuberneteskhuslen-com.id}"
-  from_port                = 22
-  to_port                  = 22
-  protocol                 = "tcp"
-}
-
-resource "aws_security_group_rule" "bastion-to-node-ssh" {
-  type                     = "ingress"
-  security_group_id        = "${aws_security_group.nodes-kuberneteskhuslen-com.id}"
-  source_security_group_id = "${aws_security_group.bastion-kuberneteskhuslen-com.id}"
-  from_port                = 22
-  to_port                  = 22
-  protocol                 = "tcp"
 }
 
 resource "aws_security_group_rule" "https-api-elb-0-0-0-0--0" {
@@ -1067,18 +866,18 @@ resource "aws_security_group_rule" "node-to-master-udp-1-65535" {
   protocol                 = "udp"
 }
 
-resource "aws_security_group_rule" "ssh-elb-to-bastion" {
-  type                     = "ingress"
-  security_group_id        = "${aws_security_group.bastion-kuberneteskhuslen-com.id}"
-  source_security_group_id = "${aws_security_group.bastion-elb-kuberneteskhuslen-com.id}"
-  from_port                = 22
-  to_port                  = 22
-  protocol                 = "tcp"
+resource "aws_security_group_rule" "ssh-external-to-master-0-0-0-0--0" {
+  type              = "ingress"
+  security_group_id = "${aws_security_group.masters-kuberneteskhuslen-com.id}"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "ssh-external-to-bastion-elb-0-0-0-0--0" {
+resource "aws_security_group_rule" "ssh-external-to-node-0-0-0-0--0" {
   type              = "ingress"
-  security_group_id = "${aws_security_group.bastion-elb-kuberneteskhuslen-com.id}"
+  security_group_id = "${aws_security_group.nodes-kuberneteskhuslen-com.id}"
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
