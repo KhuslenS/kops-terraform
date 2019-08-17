@@ -208,7 +208,7 @@ kubeControllerManager:
   attachDetachReconcileSyncPeriod: 1m0s
   cloudProvider: aws
   clusterCIDR: 100.96.0.0/11
-  clusterName: kuberneteskhuslen.com
+  clusterName: khuslenkubernetes.com
   configureCloudRoutes: false
   image: k8s.gcr.io/kube-controller-manager:v1.12.8
   leaderElection:
@@ -269,7 +269,7 @@ __EOF_CLUSTER_SPEC
 cat > ig_spec.yaml << '__EOF_IG_SPEC'
 kubelet: null
 nodeLabels:
-  kops.k8s.io/instancegroup: master-us-west-2c
+  kops.k8s.io/instancegroup: master-us-west-2a
 taints: null
 
 __EOF_IG_SPEC
@@ -280,17 +280,17 @@ Assets:
 - 7110f444d9a0e8f74d76c3d09e108f1641696149@https://storage.googleapis.com/kubernetes-release/release/v1.12.8/bin/linux/amd64/kubectl
 - 52e9d2de8a5f927307d9397308735658ee44ab8d@https://storage.googleapis.com/kubernetes-release/network-plugins/cni-plugins-amd64-v0.7.5.tgz
 - 6bf37264ee1285d4385fdb076b9b097a1771ee18@https://github.com/kubernetes/kops/releases/download/1.12.3/linux-amd64-utils.tar.gz,https://kubeupv2.s3.amazonaws.com/kops/1.12.3/linux/amd64/utils.tar.gz
-ClusterName: kuberneteskhuslen.com
-ConfigBase: s3://kuberneteskhuslen.com/kuberneteskhuslen.com
-InstanceGroupName: master-us-west-2c
+ClusterName: khuslenkubernetes.com
+ConfigBase: s3://khuslenkubernetes.com/khuslenkubernetes.com
+InstanceGroupName: master-us-west-2a
 Tags:
 - _automatic_upgrades
 - _aws
 channels:
-- s3://kuberneteskhuslen.com/kuberneteskhuslen.com/addons/bootstrap-channel.yaml
+- s3://khuslenkubernetes.com/khuslenkubernetes.com/addons/bootstrap-channel.yaml
 etcdManifests:
-- s3://kuberneteskhuslen.com/kuberneteskhuslen.com/manifests/etcd/main.yaml
-- s3://kuberneteskhuslen.com/kuberneteskhuslen.com/manifests/etcd/events.yaml
+- s3://khuslenkubernetes.com/khuslenkubernetes.com/manifests/etcd/main.yaml
+- s3://khuslenkubernetes.com/khuslenkubernetes.com/manifests/etcd/events.yaml
 protokubeImage:
   hash: 1aa277effc6d6884fef12fc113f3278156656a5c
   name: protokube:1.12.3

@@ -19,7 +19,7 @@
         "s3:ListBucket"
       ],
       "Resource": [
-        "arn:aws:s3:::kuberneteskhuslen.com"
+        "arn:aws:s3:::khuslenkubernetes.com"
       ]
     },
     {
@@ -28,15 +28,15 @@
         "s3:Get*"
       ],
       "Resource": [
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/addons/*",
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/cluster.spec",
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/config",
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/instancegroup/*",
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/pki/issued/*",
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/pki/private/kube-proxy/*",
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/pki/private/kubelet/*",
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/pki/ssh/*",
-        "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/secrets/dockerconfig"
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/addons/*",
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/cluster.spec",
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/config",
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/instancegroup/*",
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/pki/issued/*",
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/pki/private/kube-proxy/*",
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/pki/private/kubelet/*",
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/pki/ssh/*",
+        "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/secrets/dockerconfig"
       ]
     },
     {

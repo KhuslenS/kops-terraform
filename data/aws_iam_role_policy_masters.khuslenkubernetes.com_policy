@@ -46,7 +46,7 @@
       ],
       "Condition": {
         "StringEquals": {
-          "ec2:ResourceTag/KubernetesCluster": "kuberneteskhuslen.com"
+          "ec2:ResourceTag/KubernetesCluster": "khuslenkubernetes.com"
         }
       }
     },
@@ -74,7 +74,7 @@
       ],
       "Condition": {
         "StringEquals": {
-          "autoscaling:ResourceTag/KubernetesCluster": "kuberneteskhuslen.com"
+          "autoscaling:ResourceTag/KubernetesCluster": "khuslenkubernetes.com"
         }
       }
     },
@@ -143,7 +143,7 @@
         "s3:ListBucket"
       ],
       "Resource": [
-        "arn:aws:s3:::kuberneteskhuslen.com"
+        "arn:aws:s3:::khuslenkubernetes.com"
       ]
     },
     {
@@ -151,7 +151,7 @@
       "Action": [
         "s3:Get*"
       ],
-      "Resource": "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/*"
+      "Resource": "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/*"
     },
     {
       "Effect": "Allow",
@@ -160,7 +160,7 @@
         "s3:DeleteObject",
         "s3:PutObject"
       ],
-      "Resource": "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/backups/etcd/main/*"
+      "Resource": "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/backups/etcd/main/*"
     },
     {
       "Effect": "Allow",
@@ -169,7 +169,7 @@
         "s3:DeleteObject",
         "s3:PutObject"
       ],
-      "Resource": "arn:aws:s3:::kuberneteskhuslen.com/kuberneteskhuslen.com/backups/etcd/events/*"
+      "Resource": "arn:aws:s3:::khuslenkubernetes.com/khuslenkubernetes.com/backups/etcd/events/*"
     },
     {
       "Effect": "Allow",
@@ -179,7 +179,7 @@
         "route53:GetHostedZone"
       ],
       "Resource": [
-        "arn:aws:route53:::hostedzone/Z25EJ74CJ61C91"
+        "arn:aws:route53:::hostedzone/ZJSURN5WNPLN7"
       ]
     },
     {
