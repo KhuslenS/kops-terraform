@@ -8,7 +8,7 @@ resource "aws_route53_record" "api-khuslenkubernetes-com" {
     evaluate_target_health = false
   }
 
-  zone_id = "/hostedzone/ZJSURN5WNPLN7"
+  zone_id = "/hostedzone/"${var.zone_id}""
 }
 
 resource "aws_route53_record" "bastion-khuslenkubernetes-com" {
@@ -21,10 +21,10 @@ resource "aws_route53_record" "bastion-khuslenkubernetes-com" {
     evaluate_target_health = false
   }
 
-  zone_id = "/hostedzone/ZJSURN5WNPLN7"
+  zone_id = "/hostedzone/"${var.zone_id}""
 }
 
-resource "aws_route53_zone_association" "ZJSURN5WNPLN7" {
-  zone_id = "/hostedzone/ZJSURN5WNPLN7"
+resource "aws_route53_zone_association" "${var.zone_id}" {
+  zone_id = "/hostedzone/"${var.zone_id}""
   vpc_id  = "${aws_vpc.khuslenkubernetes-com.id}"
 }
