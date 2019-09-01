@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "bastions-khuslenkubernetes-com" {
   name_prefix                 = "bastions.khuslenkubernetes.com-"
-  image_id                    = "ami-0d8618ba6320df983"
+  image_id                    = "${var.image_id}"
   instance_type               = "t2.micro"
   key_name                    = "${aws_key_pair.kubernetes-khuslenkubernetes-com-3b24d0395089b58c7e5288ff5c0318e7.id}"
   iam_instance_profile        = "${aws_iam_instance_profile.bastions-khuslenkubernetes-com.id}"
@@ -22,7 +22,7 @@ resource "aws_launch_configuration" "bastions-khuslenkubernetes-com" {
 
 resource "aws_launch_configuration" "master-us-west-2a-masters-khuslenkubernetes-com" {
   name_prefix                 = "master-us-west-2a.masters.khuslenkubernetes.com-"
-  image_id                    = "ami-0d8618ba6320df983"
+  image_id                    = "${var.image_id}"
   instance_type               = "${var.master_instance_type}"
   key_name                    = "${aws_key_pair.kubernetes-khuslenkubernetes-com-3b24d0395089b58c7e5288ff5c0318e7.id}"
   iam_instance_profile        = "${aws_iam_instance_profile.masters-khuslenkubernetes-com.id}"
@@ -45,7 +45,7 @@ resource "aws_launch_configuration" "master-us-west-2a-masters-khuslenkubernetes
 
 resource "aws_launch_configuration" "master-us-west-2b-masters-khuslenkubernetes-com" {
   name_prefix                 = "master-us-west-2b.masters.khuslenkubernetes.com-"
-  image_id                    = "ami-0d8618ba6320df983"
+  image_id                    = "${var.image_id}"
   instance_type               = "${var.master_instance_type}"
   key_name                    = "${aws_key_pair.kubernetes-khuslenkubernetes-com-3b24d0395089b58c7e5288ff5c0318e7.id}"
   iam_instance_profile        = "${aws_iam_instance_profile.masters-khuslenkubernetes-com.id}"
@@ -68,7 +68,7 @@ resource "aws_launch_configuration" "master-us-west-2b-masters-khuslenkubernetes
 
 resource "aws_launch_configuration" "master-us-west-2c-masters-khuslenkubernetes-com" {
   name_prefix                 = "master-us-west-2c.masters.khuslenkubernetes.com-"
-  image_id                    = "ami-0d8618ba6320df983"
+  image_id                    = "${var.image_id}"
   instance_type               = "${var.master_instance_type}"
   key_name                    = "${aws_key_pair.kubernetes-khuslenkubernetes-com-3b24d0395089b58c7e5288ff5c0318e7.id}"
   iam_instance_profile        = "${aws_iam_instance_profile.masters-khuslenkubernetes-com.id}"
@@ -91,7 +91,7 @@ resource "aws_launch_configuration" "master-us-west-2c-masters-khuslenkubernetes
 
 resource "aws_launch_configuration" "nodes-khuslenkubernetes-com" {
   name_prefix                 = "nodes.khuslenkubernetes.com-"
-  image_id                    = "ami-0d8618ba6320df983"
+  image_id                    = "${var.image_id}"
   instance_type               = "${var.node_instance_type}"
   key_name                    = "${aws_key_pair.kubernetes-khuslenkubernetes-com-3b24d0395089b58c7e5288ff5c0318e7.id}"
   iam_instance_profile        = "${aws_iam_instance_profile.nodes-khuslenkubernetes-com.id}"
