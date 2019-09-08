@@ -1,29 +1,29 @@
-resource "aws_eip" "us-west-2a-khuslenkubernetes-com" {
+resource "aws_eip" "${var.region}a-khuslenkubernetes-com" {
   vpc = true
 
   tags = {
     KubernetesCluster                             = "khuslenkubernetes.com"
-    Name                                          = "us-west-2a.khuslenkubernetes.com"
+    Name                                          = "${var.region}a.khuslenkubernetes.com"
     "kubernetes.io/cluster/khuslenkubernetes.com" = "owned"
   }
 }
 
-resource "aws_eip" "us-west-2b-khuslenkubernetes-com" {
+resource "aws_eip" "${var.region}b-khuslenkubernetes-com" {
   vpc = true
 
   tags = {
     KubernetesCluster                             = "khuslenkubernetes.com"
-    Name                                          = "us-west-2b.khuslenkubernetes.com"
+    Name                                          = "${var.region}b.khuslenkubernetes.com"
     "kubernetes.io/cluster/khuslenkubernetes.com" = "owned"
   }
 }
 
-resource "aws_eip" "us-west-2c-khuslenkubernetes-com" {
+resource "aws_eip" "${var.region}c-khuslenkubernetes-com" {
   vpc = true
 
   tags = {
     KubernetesCluster                             = "khuslenkubernetes.com"
-    Name                                          = "us-west-2c.khuslenkubernetes.com"
+    Name                                          = "${var.region}c.khuslenkubernetes.com"
     "kubernetes.io/cluster/khuslenkubernetes.com" = "owned"
   }
 }

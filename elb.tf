@@ -9,7 +9,7 @@ resource "aws_elb" "api-khuslenkubernetes-com" {
   }
 
   security_groups = ["${aws_security_group.api-elb-khuslenkubernetes-com.id}"]
-  subnets         = ["${aws_subnet.utility-us-west-2a-khuslenkubernetes-com.id}", "${aws_subnet.utility-us-west-2b-khuslenkubernetes-com.id}", "${aws_subnet.utility-us-west-2c-khuslenkubernetes-com.id}"]
+  subnets         = ["${aws_subnet.utility-${var.region}a-khuslenkubernetes-com.id}", "${aws_subnet.utility-${var.region}b-khuslenkubernetes-com.id}", "${aws_subnet.utility-${var.region}c-khuslenkubernetes-com.id}"]
 
   health_check = {
     target              = "SSL:443"
@@ -39,7 +39,7 @@ resource "aws_elb" "bastion-khuslenkubernetes-com" {
   }
 
   security_groups = ["${aws_security_group.bastion-elb-khuslenkubernetes-com.id}"]
-  subnets         = ["${aws_subnet.utility-us-west-2a-khuslenkubernetes-com.id}", "${aws_subnet.utility-us-west-2b-khuslenkubernetes-com.id}", "${aws_subnet.utility-us-west-2c-khuslenkubernetes-com.id}"]
+  subnets         = ["${aws_subnet.utility-${var.region}a-khuslenkubernetes-com.id}", "${aws_subnet.utility-${var.region}b-khuslenkubernetes-com.id}", "${aws_subnet.utility-${var.region}c-khuslenkubernetes-com.id}"]
 
   health_check = {
     target              = "TCP:22"
