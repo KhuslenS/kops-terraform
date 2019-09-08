@@ -11,7 +11,7 @@ resource "aws_vpc" "khuslenkubernetes-com" {
 }
 
 resource "aws_vpc_dhcp_options" "khuslenkubernetes-com" {
-  domain_name         = "us-west-2.compute.internal"
+  domain_name         = "${var.region}.compute.internal"
   domain_name_servers = ["AmazonProvidedDNS"]
 
   tags = {

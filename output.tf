@@ -20,7 +20,7 @@ output "cluster_name" {
 }
 
 output "master_autoscaling_group_ids" {
-  value = ["${aws_autoscaling_group.master-us-west-2a-masters-khuslenkubernetes-com.id}", "${aws_autoscaling_group.master-us-west-2b-masters-khuslenkubernetes-com.id}", "${aws_autoscaling_group.master-us-west-2c-masters-khuslenkubernetes-com.id}"]
+  value = ["${aws_autoscaling_group.master-${var.region}a-masters-khuslenkubernetes-com.id}", "${aws_autoscaling_group.master-${var.region}b-masters-khuslenkubernetes-com.id}", "${aws_autoscaling_group.master-${var.region}c-masters-khuslenkubernetes-com.id}"]
 }
 
 output "master_security_group_ids" {
@@ -44,7 +44,7 @@ output "node_security_group_ids" {
 }
 
 output "node_subnet_ids" {
-  value = ["${aws_subnet.us-west-2a-khuslenkubernetes-com.id}", "${aws_subnet.us-west-2b-khuslenkubernetes-com.id}", "${aws_subnet.us-west-2c-khuslenkubernetes-com.id}"]
+  value = ["${aws_subnet.${var.region}a-khuslenkubernetes-com.id}", "${aws_subnet.${var.region}b-khuslenkubernetes-com.id}", "${aws_subnet.${var.region}c-khuslenkubernetes-com.id}"]
 }
 
 output "nodes_role_arn" {
@@ -56,47 +56,47 @@ output "nodes_role_name" {
 }
 
 output "region" {
-  value = "us-west-2"
+  value = "${var.region}"
 }
 
-output "route_table_private-us-west-2a_id" {
-  value = "${aws_route_table.private-us-west-2a-khuslenkubernetes-com.id}"
+output "route_table_private-${var.region}a_id" {
+  value = "${aws_route_table.private-${var.region}a-khuslenkubernetes-com.id}"
 }
 
-output "route_table_private-us-west-2b_id" {
-  value = "${aws_route_table.private-us-west-2b-khuslenkubernetes-com.id}"
+output "route_table_private-${var.region}b_id" {
+  value = "${aws_route_table.private-${var.region}b-khuslenkubernetes-com.id}"
 }
 
-output "route_table_private-us-west-2c_id" {
-  value = "${aws_route_table.private-us-west-2c-khuslenkubernetes-com.id}"
+output "route_table_private-${var.region}c_id" {
+  value = "${aws_route_table.private-${var.region}c-khuslenkubernetes-com.id}"
 }
 
 output "route_table_public_id" {
   value = "${aws_route_table.khuslenkubernetes-com.id}"
 }
 
-output "subnet_us-west-2a_id" {
-  value = "${aws_subnet.us-west-2a-khuslenkubernetes-com.id}"
+output "subnet_${var.region}a_id" {
+  value = "${aws_subnet.${var.region}a-khuslenkubernetes-com.id}"
 }
 
-output "subnet_us-west-2b_id" {
-  value = "${aws_subnet.us-west-2b-khuslenkubernetes-com.id}"
+output "subnet_${var.region}b_id" {
+  value = "${aws_subnet.${var.region}b-khuslenkubernetes-com.id}"
 }
 
-output "subnet_us-west-2c_id" {
-  value = "${aws_subnet.us-west-2c-khuslenkubernetes-com.id}"
+output "subnet_${var.region}c_id" {
+  value = "${aws_subnet.${var.region}c-khuslenkubernetes-com.id}"
 }
 
-output "subnet_utility-us-west-2a_id" {
-  value = "${aws_subnet.utility-us-west-2a-khuslenkubernetes-com.id}"
+output "subnet_utility-${var.region}a_id" {
+  value = "${aws_subnet.utility-${var.region}a-khuslenkubernetes-com.id}"
 }
 
-output "subnet_utility-us-west-2b_id" {
-  value = "${aws_subnet.utility-us-west-2b-khuslenkubernetes-com.id}"
+output "subnet_utility-${var.region}b_id" {
+  value = "${aws_subnet.utility-${var.region}b-khuslenkubernetes-com.id}"
 }
 
-output "subnet_utility-us-west-2c_id" {
-  value = "${aws_subnet.utility-us-west-2c-khuslenkubernetes-com.id}"
+output "subnet_utility-${var.region}c_id" {
+  value = "${aws_subnet.utility-${var.region}c-khuslenkubernetes-com.id}"
 }
 
 output "vpc_cidr_block" {

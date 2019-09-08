@@ -1,5 +1,5 @@
 resource "aws_ebs_volume" "a-etcd-events-khuslenkubernetes-com" {
-  availability_zone = "us-west-2a"
+  availability_zone = "${var.region}.a"
   size              = 20
   type              = "gp2"
   encrypted         = false
@@ -14,7 +14,7 @@ resource "aws_ebs_volume" "a-etcd-events-khuslenkubernetes-com" {
 }
 
 resource "aws_ebs_volume" "a-etcd-main-khuslenkubernetes-com" {
-  availability_zone = "us-west-2a"
+  availability_zone = "${var.region}.a"
   size              = 20
   type              = "gp2"
   encrypted         = false
@@ -29,7 +29,7 @@ resource "aws_ebs_volume" "a-etcd-main-khuslenkubernetes-com" {
 }
 
 resource "aws_ebs_volume" "b-etcd-events-khuslenkubernetes-com" {
-  availability_zone = "us-west-2b"
+  availability_zone = "${var.region}.b"
   size              = 20
   type              = "gp2"
   encrypted         = false
@@ -44,7 +44,7 @@ resource "aws_ebs_volume" "b-etcd-events-khuslenkubernetes-com" {
 }
 
 resource "aws_ebs_volume" "b-etcd-main-khuslenkubernetes-com" {
-  availability_zone = "us-west-2b"
+  availability_zone = "${var.region}.b"
   size              = 20
   type              = "gp2"
   encrypted         = false
@@ -59,7 +59,7 @@ resource "aws_ebs_volume" "b-etcd-main-khuslenkubernetes-com" {
 }
 
 resource "aws_ebs_volume" "c-etcd-events-khuslenkubernetes-com" {
-  availability_zone = "us-west-2c"
+  availability_zone = "${var.region}.c"
   size              = 20
   type              = "gp2"
   encrypted         = false
@@ -74,7 +74,7 @@ resource "aws_ebs_volume" "c-etcd-events-khuslenkubernetes-com" {
 }
 
 resource "aws_ebs_volume" "c-etcd-main-khuslenkubernetes-com" {
-  availability_zone = "us-west-2c"
+  availability_zone = "${var.region}.c"
   size              = 20
   type              = "gp2"
   encrypted         = false

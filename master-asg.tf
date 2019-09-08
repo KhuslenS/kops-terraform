@@ -1,11 +1,11 @@
 
 
-resource "aws_autoscaling_group" "master-us-west-2a-masters-khuslenkubernetes-com" {
-  name                 = "master-us-west-2a.masters.khuslenkubernetes.com"
-  launch_configuration = "${aws_launch_configuration.master-us-west-2a-masters-khuslenkubernetes-com.id}"
+resource "aws_autoscaling_group" "master-${var.region}.a-masters-khuslenkubernetes-com" {
+  name                 = "master-${var.region}.a.masters.khuslenkubernetes.com"
+  launch_configuration = "${aws_launch_configuration.master-${var.region}.a-masters-khuslenkubernetes-com.id}"
   max_size             = 1
   min_size             = 1
-  vpc_zone_identifier  = ["${aws_subnet.us-west-2a-khuslenkubernetes-com.id}"]
+  vpc_zone_identifier  = ["${aws_subnet.${var.region}.a-khuslenkubernetes-com.id}"]
 
   tag = {
     key                 = "KubernetesCluster"
@@ -15,13 +15,13 @@ resource "aws_autoscaling_group" "master-us-west-2a-masters-khuslenkubernetes-co
 
   tag = {
     key                 = "Name"
-    value               = "master-us-west-2a.masters.khuslenkubernetes.com"
+    value               = "master-${var.region}.a.masters.khuslenkubernetes.com"
     propagate_at_launch = true
   }
 
   tag = {
     key                 = "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
-    value               = "master-us-west-2a"
+    value               = "master-${var.region}.a"
     propagate_at_launch = true
   }
 
@@ -35,12 +35,12 @@ resource "aws_autoscaling_group" "master-us-west-2a-masters-khuslenkubernetes-co
   enabled_metrics     = ["GroupDesiredCapacity", "GroupInServiceInstances", "GroupMaxSize", "GroupMinSize", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
 }
 
-resource "aws_autoscaling_group" "master-us-west-2b-masters-khuslenkubernetes-com" {
-  name                 = "master-us-west-2b.masters.khuslenkubernetes.com"
-  launch_configuration = "${aws_launch_configuration.master-us-west-2b-masters-khuslenkubernetes-com.id}"
+resource "aws_autoscaling_group" "master-${var.region}.b-masters-khuslenkubernetes-com" {
+  name                 = "master-${var.region}.b.masters.khuslenkubernetes.com"
+  launch_configuration = "${aws_launch_configuration.master-${var.region}.b-masters-khuslenkubernetes-com.id}"
   max_size             = 1
   min_size             = 1
-  vpc_zone_identifier  = ["${aws_subnet.us-west-2b-khuslenkubernetes-com.id}"]
+  vpc_zone_identifier  = ["${aws_subnet.${var.region}.b-khuslenkubernetes-com.id}"]
 
   tag = {
     key                 = "KubernetesCluster"
@@ -50,13 +50,13 @@ resource "aws_autoscaling_group" "master-us-west-2b-masters-khuslenkubernetes-co
 
   tag = {
     key                 = "Name"
-    value               = "master-us-west-2b.masters.khuslenkubernetes.com"
+    value               = "master-${var.region}.b.masters.khuslenkubernetes.com"
     propagate_at_launch = true
   }
 
   tag = {
     key                 = "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
-    value               = "master-us-west-2b"
+    value               = "master-${var.region}.b"
     propagate_at_launch = true
   }
 
@@ -70,12 +70,12 @@ resource "aws_autoscaling_group" "master-us-west-2b-masters-khuslenkubernetes-co
   enabled_metrics     = ["GroupDesiredCapacity", "GroupInServiceInstances", "GroupMaxSize", "GroupMinSize", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
 }
 
-resource "aws_autoscaling_group" "master-us-west-2c-masters-khuslenkubernetes-com" {
-  name                 = "master-us-west-2c.masters.khuslenkubernetes.com"
-  launch_configuration = "${aws_launch_configuration.master-us-west-2c-masters-khuslenkubernetes-com.id}"
+resource "aws_autoscaling_group" "master-${var.region}.c-masters-khuslenkubernetes-com" {
+  name                 = "master-${var.region}.c.masters.khuslenkubernetes.com"
+  launch_configuration = "${aws_launch_configuration.master-${var.region}.c-masters-khuslenkubernetes-com.id}"
   max_size             = 1
   min_size             = 1
-  vpc_zone_identifier  = ["${aws_subnet.us-west-2c-khuslenkubernetes-com.id}"]
+  vpc_zone_identifier  = ["${aws_subnet.${var.region}.c-khuslenkubernetes-com.id}"]
 
   tag = {
     key                 = "KubernetesCluster"
@@ -85,13 +85,13 @@ resource "aws_autoscaling_group" "master-us-west-2c-masters-khuslenkubernetes-co
 
   tag = {
     key                 = "Name"
-    value               = "master-us-west-2c.masters.khuslenkubernetes.com"
+    value               = "master-${var.region}.c.masters.khuslenkubernetes.com"
     propagate_at_launch = true
   }
 
   tag = {
     key                 = "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
-    value               = "master-us-west-2c"
+    value               = "master-${var.region}.c"
     propagate_at_launch = true
   }
 
