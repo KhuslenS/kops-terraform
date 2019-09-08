@@ -9,7 +9,7 @@ resource "aws_route_table" "khuslenkubernetes-com" {
   }
 }
 
-resource "aws_route_table" "private-${var.region}.a-khuslenkubernetes-com" {
+resource "aws_route_table" "private-a-khuslenkubernetes-com" {
   vpc_id = "${aws_vpc.khuslenkubernetes-com.id}"
 
   tags = {
@@ -20,7 +20,7 @@ resource "aws_route_table" "private-${var.region}.a-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_route_table" "private-${var.region}.b-khuslenkubernetes-com" {
+resource "aws_route_table" "private-b-khuslenkubernetes-com" {
   vpc_id = "${aws_vpc.khuslenkubernetes-com.id}"
 
   tags = {
@@ -31,7 +31,7 @@ resource "aws_route_table" "private-${var.region}.b-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_route_table" "private-${var.region}.c-khuslenkubernetes-com" {
+resource "aws_route_table" "private-c-khuslenkubernetes-com" {
   vpc_id = "${aws_vpc.khuslenkubernetes-com.id}"
 
   tags = {
@@ -42,32 +42,32 @@ resource "aws_route_table" "private-${var.region}.c-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_route_table_association" "private-${var.region}.a-khuslenkubernetes-com" {
+resource "aws_route_table_association" "private-a-khuslenkubernetes-com" {
   subnet_id      = "${aws_subnet.${var.region}.a-khuslenkubernetes-com.id}"
   route_table_id = "${aws_route_table.private-${var.region}.a-khuslenkubernetes-com.id}"
 }
 
-resource "aws_route_table_association" "private-${var.region}.b-khuslenkubernetes-com" {
+resource "aws_route_table_association" "private-b-khuslenkubernetes-com" {
   subnet_id      = "${aws_subnet.${var.region}.b-khuslenkubernetes-com.id}"
   route_table_id = "${aws_route_table.private-${var.region}.b-khuslenkubernetes-com.id}"
 }
 
-resource "aws_route_table_association" "private-${var.region}.c-khuslenkubernetes-com" {
+resource "aws_route_table_association" "private-c-khuslenkubernetes-com" {
   subnet_id      = "${aws_subnet.${var.region}.c-khuslenkubernetes-com.id}"
   route_table_id = "${aws_route_table.private-${var.region}.c-khuslenkubernetes-com.id}"
 }
 
-resource "aws_route_table_association" "utility-${var.region}.a-khuslenkubernetes-com" {
+resource "aws_route_table_association" "utility-a-khuslenkubernetes-com" {
   subnet_id      = "${aws_subnet.utility-${var.region}.a-khuslenkubernetes-com.id}"
   route_table_id = "${aws_route_table.khuslenkubernetes-com.id}"
 }
 
-resource "aws_route_table_association" "utility-${var.region}.b-khuslenkubernetes-com" {
+resource "aws_route_table_association" "utility-b-khuslenkubernetes-com" {
   subnet_id      = "${aws_subnet.utility-${var.region}.b-khuslenkubernetes-com.id}"
   route_table_id = "${aws_route_table.khuslenkubernetes-com.id}"
 }
 
-resource "aws_route_table_association" "utility-${var.region}.c-khuslenkubernetes-com" {
+resource "aws_route_table_association" "utility-c-khuslenkubernetes-com" {
   subnet_id      = "${aws_subnet.utility-${var.region}.c-khuslenkubernetes-com.id}"
   route_table_id = "${aws_route_table.khuslenkubernetes-com.id}"
 }

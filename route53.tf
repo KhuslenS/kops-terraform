@@ -24,7 +24,7 @@ resource "aws_route53_record" "bastion-khuslenkubernetes-com" {
   zone_id = "/hostedzone/"${var.zone_id}""
 }
 
-resource "aws_route53_zone_association" "${var.zone_id}" {
+resource "aws_route53_zone_association" " {
   zone_id = "/hostedzone/"${var.zone_id}""
   vpc_id  = "${aws_vpc.khuslenkubernetes-com.id}"
 }

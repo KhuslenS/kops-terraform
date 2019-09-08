@@ -1,4 +1,4 @@
-resource "aws_nat_gateway" "${var.region}.a-khuslenkubernetes-com" {
+resource "aws_nat_gateway" "khuslenkubernetes-com" {
   allocation_id = "${aws_eip.${var.region}.a-khuslenkubernetes-com.id}"
   subnet_id     = "${aws_subnet.utility-${var.region}.a-khuslenkubernetes-com.id}"
 
@@ -9,7 +9,7 @@ resource "aws_nat_gateway" "${var.region}.a-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_nat_gateway" "${var.region}.b-khuslenkubernetes-com" {
+resource "aws_nat_gateway" "khuslenkubernetes-com" {
   allocation_id = "${aws_eip.${var.region}.b-khuslenkubernetes-com.id}"
   subnet_id     = "${aws_subnet.utility-${var.region}.b-khuslenkubernetes-com.id}"
 
@@ -20,7 +20,7 @@ resource "aws_nat_gateway" "${var.region}.b-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_nat_gateway" "${var.region}.c-khuslenkubernetes-com" {
+resource "aws_nat_gateway" "khuslenkubernetes-com" {
   allocation_id = "${aws_eip.${var.region}.c-khuslenkubernetes-com.id}"
   subnet_id     = "${aws_subnet.utility-${var.region}.c-khuslenkubernetes-com.id}"
 

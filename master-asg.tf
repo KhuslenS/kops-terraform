@@ -1,6 +1,6 @@
 
 
-resource "aws_autoscaling_group" "master-${var.region}.a-masters-khuslenkubernetes-com" {
+resource "aws_autoscaling_group" "master-khuslenkubernetes-com" {
   name                 = "master-${var.region}.a.masters.khuslenkubernetes.com"
   launch_configuration = "${aws_launch_configuration.master-${var.region}.a-masters-khuslenkubernetes-com.id}"
   max_size             = 1
@@ -35,7 +35,7 @@ resource "aws_autoscaling_group" "master-${var.region}.a-masters-khuslenkubernet
   enabled_metrics     = ["GroupDesiredCapacity", "GroupInServiceInstances", "GroupMaxSize", "GroupMinSize", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
 }
 
-resource "aws_autoscaling_group" "master-${var.region}.b-masters-khuslenkubernetes-com" {
+resource "aws_autoscaling_group" "masters-khuslenkubernetes-com" {
   name                 = "master-${var.region}.b.masters.khuslenkubernetes.com"
   launch_configuration = "${aws_launch_configuration.master-${var.region}.b-masters-khuslenkubernetes-com.id}"
   max_size             = 1
@@ -70,7 +70,7 @@ resource "aws_autoscaling_group" "master-${var.region}.b-masters-khuslenkubernet
   enabled_metrics     = ["GroupDesiredCapacity", "GroupInServiceInstances", "GroupMaxSize", "GroupMinSize", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
 }
 
-resource "aws_autoscaling_group" "master-${var.region}.c-masters-khuslenkubernetes-com" {
+resource "aws_autoscaling_group" "master-khuslenkubernetes-com" {
   name                 = "master-${var.region}.c.masters.khuslenkubernetes.com"
   launch_configuration = "${aws_launch_configuration.master-${var.region}.c-masters-khuslenkubernetes-com.id}"
   max_size             = 1

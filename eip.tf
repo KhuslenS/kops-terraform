@@ -1,4 +1,4 @@
-resource "aws_eip" "${var.region}a-khuslenkubernetes-com" {
+resource "aws_eip" "-khuslenkubernetes-com" {
   vpc = true
 
   tags = {
@@ -8,7 +8,7 @@ resource "aws_eip" "${var.region}a-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_eip" "${var.region}b-khuslenkubernetes-com" {
+resource "aws_eip" "khuslenkubernetes-com" {
   vpc = true
 
   tags = {
@@ -18,7 +18,7 @@ resource "aws_eip" "${var.region}b-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_eip" "${var.region}c-khuslenkubernetes-com" {
+resource "aws_eip" "khuslenkubernetes-com" {
   vpc = true
 
   tags = {

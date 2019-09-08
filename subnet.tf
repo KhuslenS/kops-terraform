@@ -1,4 +1,4 @@
-resource "aws_subnet" "${var.region}.a-khuslenkubernetes-com" {
+resource "aws_subnet" "a-khuslenkubernetes-com" {
   vpc_id            = "${aws_vpc.khuslenkubernetes-com.id}"
   cidr_block        = "172.20.32.0/19"
   availability_zone = "${var.region}.a"
@@ -12,7 +12,7 @@ resource "aws_subnet" "${var.region}.a-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_subnet" "${var.region}.b-khuslenkubernetes-com" {
+resource "aws_subnet" "b-khuslenkubernetes-com" {
   vpc_id            = "${aws_vpc.khuslenkubernetes-com.id}"
   cidr_block        = "172.20.64.0/19"
   availability_zone = "${var.region}.b"
@@ -26,7 +26,7 @@ resource "aws_subnet" "${var.region}.b-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_subnet" "${var.region}.c-khuslenkubernetes-com" {
+resource "aws_subnet" "c-khuslenkubernetes-com" {
   vpc_id            = "${aws_vpc.khuslenkubernetes-com.id}"
   cidr_block        = "172.20.96.0/19"
   availability_zone = "${var.region}.c"
@@ -40,7 +40,7 @@ resource "aws_subnet" "${var.region}.c-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_subnet" "utility-${var.region}.a-khuslenkubernetes-com" {
+resource "aws_subnet" "utility-a-khuslenkubernetes-com" {
   vpc_id            = "${aws_vpc.khuslenkubernetes-com.id}"
   cidr_block        = "172.20.0.0/22"
   availability_zone = "${var.region}.a"
@@ -54,7 +54,7 @@ resource "aws_subnet" "utility-${var.region}.a-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_subnet" "utility-${var.region}.b-khuslenkubernetes-com" {
+resource "aws_subnet" "utility-b-khuslenkubernetes-com" {
   vpc_id            = "${aws_vpc.khuslenkubernetes-com.id}"
   cidr_block        = "172.20.4.0/22"
   availability_zone = "${var.region}.b"
@@ -68,7 +68,7 @@ resource "aws_subnet" "utility-${var.region}.b-khuslenkubernetes-com" {
   }
 }
 
-resource "aws_subnet" "utility-${var.region}.c-khuslenkubernetes-com" {
+resource "aws_subnet" "utility-c-khuslenkubernetes-com" {
   vpc_id            = "${aws_vpc.khuslenkubernetes-com.id}"
   cidr_block        = "172.20.8.0/22"
   availability_zone = "${var.region}.c"
