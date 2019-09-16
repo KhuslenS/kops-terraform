@@ -9,7 +9,7 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/l
 kops:
 wget https://github.com/kubernetes/kops/releases/download/1.10.0/kops-linux-amd64
 
-
+You will need s3 bucket in the same region that you are spinning up k8 cluster
 export command:
 export KOPS_STATE_STORE=s3://khuslenkubernetes.com
 (environment variable)
