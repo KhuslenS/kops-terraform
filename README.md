@@ -8,17 +8,18 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/l
 
 kops:
 wget https://github.com/kubernetes/kops/releases/download/1.10.0/kops-linux-amd64
-chmod +x kops-linux-amd64
+
 
 export command:
 export KOPS_STATE_STORE=s3://khuslenkubernetes.com
+(environment variable)
 
 Kops commands to create k8 cluster:
 kops create cluster --name=khuslenkubernetes.com     --node-size="t2.micro"   --master-size="t2.micro"    --master-zones="us-west-2a,us-west-2b,us-west-2c"   --networking="weave"    --topology="private"         --bastion=true  --dns="private"      --zones="us-west-2a,us-west-2b,us-west-2c"    --state="s3://khuslenkubernetes.com"      --out=.    --target="terraform"   --yes
 
 FINALLY YOU WILL HAVE THE TERRAFORM FILE TO RUN.
 
-TERRAFORM INIT
-TERRAFORM PLAN
+TERRAFORM INIT,
+TERRAFORM PLAN,
 TERRAFORM APPLY
  :).
